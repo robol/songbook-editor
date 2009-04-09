@@ -30,7 +30,7 @@ class interface(QtGui.QMainWindow):
 
         newbody = unicode(self.ui.te_body.toPlainText())
         print newbody
-        newbody = newbody.split("\n\n")
+        newbody = re.split("\n\n+", newbody)
         for paragraph in newbody:
             if(len(paragraph) < 3):
                 break

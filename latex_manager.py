@@ -29,8 +29,13 @@ class latex_manager():
 
         latex_song += "\n\\end{song}\n\n"
         
+        # Transform chords in LaTeX Chords
         latex_song = re.sub("\[", "\\Ch{", latex_song)
+        latex_song = re.sub("\](\w|\s)(\w|\s)(\w|\s)", self.quadra_to_chord_end, latex_song)
         latex_song = re.sub("\]", "}{}", latex_song)
         
         return latex_song
         
+    def quadra_to_chord_end(self,m):
+        st = "}{" + m.group(1) + m.group(2) + m.group(3) + "}"
+        return st
