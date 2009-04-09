@@ -3,20 +3,59 @@
 from PyQt4 import QtGui, QtCore
 from interface import *
 from song import *
+from latex_manager import *
+import re
 
 class interface(QtGui.QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, lm, parent=None):
         super(interface, self).__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        # Connections
         self.connect(self.ui.actionEsci_2, QtCore.SIGNAL("activated()"), self.exit_called)
+        self.connect(self.ui.btn_create_latex_song, QtCore.SIGNAL("clicked()"), self.create_latex_song)
 
+    # Functions to manage events
     def exit_called(self):
         print "TODO: Save data on exit"
 
+    def get_active_song(self):
+        newtitle = str(self.ui.le_title.text())
+        newmauthor = str(self.ui.le_mauthor.text())
+        newtauthor = str(self.ui.le_tauthor.text())
+        newyear = str(self.ui.le_year.text())
+        newtone = str(self.ui.le_tone.text())
+        newsong = song(newtitle, [], newmauthor, newtauthor, newtone, newyear)
+
+        newbody = unicode(self.ui.te_body.toPlainText())
+        print newbody
+        newbody = newbody.split("\n\n")
+        for paragraph in newbody:
+            if(len(paragraph) < 3):
+                break
+            if( (paragraph[0] == 'R') & (paragraph[1] == ':') ):
+                newsong.add_chorus(paragraph.split("R:")[1])
+            else:
+                newsong.add_verse(paragraph)
+
+        return newsong
+
+    def create_latex_song(self):
+        song = self.get_active_song()
+        filetowrite = lm.create_song(song)
+        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva file latex", "/home/leonardo", "LaTeX Source File (*.tex)")
+        handle = open(filename, 'w')
+        handle.write(filetowrite.encode("utf-8"))
+        handle.close()
+    
+    
+
+
+
 if __name__ == "__main__":
     app = QtGui.QApplication(None)
-    widget = interface()
+    lm = latex_manager()
+    widget = interface(lm)
     widget.show()
     app.exec_()
