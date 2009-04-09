@@ -22,17 +22,17 @@ class verse():
 
 class song():
     
-    def __init__(self, newtitle):
+    def __init__(self, newtitle, newbody=[], newmauthor = "Unknown", newtauthor="Unknown", newtone="Unknown", newyear="Unknown"):
         # Initialize vars..
         self.title = newtitle
         # Body is an array of string with verses and
         # chorus to be understood with __structure
-        self.body = []
+        self.body = newbody
         
-        self.mauthor = "Unknown"
-        self.tauthor = "Unknown"
-        self.tone = "Unknown"
-        self.year = "Unknown"
+        self.mauthor = newmauthor
+        self.tauthor = newtauthor
+        self.tone = newtone
+        self.year = newyear
 
         # Structure is an array of the type 'c' 'v'
         # where c means Chorus, v means Verse
