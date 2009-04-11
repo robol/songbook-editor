@@ -14,6 +14,8 @@ class latex_manager():
         year = song.year
         body = song.body
         
+        # We really have to assume that latex_song is unicode, 
+        # or the write() function will eat us!
         latex_song = unicode()
         latex_song += "\\begin{song}{" + title + "}{" + tone + "}\n{" + mauthor + "}\n{" + tauthor + "}\n{" + year + "}" + "{}\n\n\\index{" + title + "}\n\n"
 

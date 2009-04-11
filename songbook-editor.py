@@ -21,11 +21,11 @@ class interface(QtGui.QMainWindow):
         print "TODO: Save data on exit"
 
     def get_active_song(self):
-        newtitle = str(self.ui.le_title.text())
-        newmauthor = str(self.ui.le_mauthor.text())
-        newtauthor = str(self.ui.le_tauthor.text())
-        newyear = str(self.ui.le_year.text())
-        newtone = str(self.ui.le_tone.text())
+        newtitle = unicode(self.ui.le_title.text())
+        newmauthor = unicode(self.ui.le_mauthor.text())
+        newtauthor = unicode(self.ui.le_tauthor.text())
+        newyear = unicode(self.ui.le_year.text())
+        newtone = unicode(self.ui.le_tone.text())
         newsong = song(newtitle, [], newmauthor, newtauthor, newtone, newyear)
 
         newbody = unicode(self.ui.te_body.toPlainText())
@@ -46,6 +46,8 @@ class interface(QtGui.QMainWindow):
         filetowrite = lm.create_song(song)
         filename = QtGui.QFileDialog.getSaveFileName(self, "Salva file latex", "/home/leonardo", "LaTeX Source File (*.tex)")
         handle = open(filename, 'w')
+        # Just remember that filetowrite is an "unicode" object, treat it
+        # as it just deserve
         handle.write(filetowrite.encode("utf-8"))
         handle.close()
     
