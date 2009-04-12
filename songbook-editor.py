@@ -11,12 +11,22 @@ class interface(QtGui.QMainWindow):
         super(interface, self).__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        # Create an empty database of songs... 
+        self.song_db = []
 
         # Connections
         self.connect(self.ui.actionEsci_2, QtCore.SIGNAL("activated()"), self.exit_called)
         self.connect(self.ui.btn_create_latex_song, QtCore.SIGNAL("clicked()"), self.create_latex_song)
-
+        self.connect(self.ui.btn_savesong, QtCore.SIGNAL("clicked()"), self.savesong)
+        self.connect(self.ui.list_songs, QtCore.SIGNAL("currentTextChanged ( QString )"), self.item_selected)
+        self.connect(self.ui.btn_new_song, QtCore.SIGNAL("clicked()"), self.new_song)
+    
     # Functions to manage events
+    def new_song(self):
+        s = song("")
+        self.set_active_song(s)
+    
+
     def exit_called(self):
         print "TODO: Save data on exit"
 
@@ -40,6 +50,42 @@ class interface(QtGui.QMainWindow):
                 newsong.add_verse(paragraph)
 
         return newsong
+
+    def savesong(self):
+        need_new_song = True
+        song_to_save = self.get_active_song()
+        list_item = QtGui.QListWidgetItem(song_to_save.title)
+        # Check if we have already saved this song or if it's a new entry
+        for song in self.song_db:
+            if(song.title == song_to_save.title):
+                song = song_to_save
+                need_new_song = False
+                break
+        if(need_new_song):
+            self.song_db.append(song_to_save)
+            self.ui.list_songs.addItem(list_item)
+
+    def set_active_song(self, newsong):
+        self.ui.le_title.setText(newsong.title)
+        self.ui.le_mauthor.setText(newsong.mauthor)
+        self.ui.le_tauthor.setText(newsong.tauthor)
+        self.ui.le_year.setText(newsong.year)
+        self.ui.le_tone.setText(newsong.tone)
+        output = unicode()
+        for paragraph in newsong.body:
+            if(paragraph.is_chorus()):
+                output += "R:"
+            output += paragraph.content()
+            output += "\n\n"
+    
+        
+    def item_selected(self, item_text):
+        print "ohi"
+        for song in self.song_db:
+            if(song.title == unicode(item_text)):
+                newsong = song
+        self.set_active_song(newsong)
+
 
     def create_latex_song(self):
         song = self.get_active_song()
