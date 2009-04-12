@@ -14,19 +14,36 @@ class interface(QtGui.QMainWindow):
         # Create an empty database of songs... 
         self.song_db = []
 
+        # Our format separator
+        self.sep = ":::"
+        self.sep_song = "***"
+
         # Connections
         self.connect(self.ui.actionEsci_2, QtCore.SIGNAL("activated()"), self.exit_called)
+
+        # Song edit part
         self.connect(self.ui.btn_create_latex_song, QtCore.SIGNAL("clicked()"), self.create_latex_song)
         self.connect(self.ui.btn_savesong, QtCore.SIGNAL("clicked()"), self.savesong)
+
+        # About the list
         self.connect(self.ui.list_songs, QtCore.SIGNAL("currentTextChanged ( QString )"), self.item_selected)
         self.connect(self.ui.btn_new_song, QtCore.SIGNAL("clicked()"), self.new_song)
+        self.connect(self.ui.btn_delete_song, QtCore.SIGNAL("clicked()"), self.delete_item_from_list)
+
+        # File menu
+        self.connect(self.ui.actionSalva_canzone, QtCore.SIGNAL("activated()"), self.save_song_to_file)
+        self.connect(self.ui.actionImporta_canzone, QtCore.SIGNAL("activated()"), self.import_song_from_file)
+        self.connect(self.ui.actionSalva, QtCore.SIGNAL("activated()"), self.save_songs_to_file)
     
     # Functions to manage events
     def new_song(self):
         s = song("")
         self.set_active_song(s)
-    
 
+    def delete_item_from_list(self):
+        item = self.ui.list_songs.currentRow()
+        self.ui.list_songs.takeItem(item)
+    
     def exit_called(self):
         print "TODO: Save data on exit"
 
@@ -65,6 +82,60 @@ class interface(QtGui.QMainWindow):
             self.song_db.append(song_to_save)
             self.ui.list_songs.addItem(list_item)
 
+    def save_song_to_file(self):
+        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva Canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
+        output = self.create_song_file()
+        handle = open(filename, 'w')
+        handle.write(output.encode("utf-8"))
+        handle.close()
+
+    def create_song_file(self):
+        sep = unicode(self.sep)
+        song_to_save = self.get_active_song()
+        # filename = QtGui.QFileDialog.getSaveFileName(self, "Salva canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
+        # handle = open(filename, 'w')
+        output = unicode()
+        output += song_to_save.title + sep + song_to_save.mauthor + sep + song_to_save.tauthor + sep + song_to_save.tone + sep + song_to_save.year
+        for par in song_to_save.body:
+            if(par.is_chorus()):
+                rit = "R:"
+            else:
+                rit = ""
+            output += sep + rit + par.content()
+        return output
+        # handle.write(output.encode())
+        # handle.close()
+
+    def save_songs_to_file(self):
+        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva Canzoniere", "", "Canzoniere di RobolCanzoniere (*.rcc)")
+        song_files = []
+        for song in self.song_db:
+            self.set_active_song(song)
+            song_files.append(self.create_song_file)
+        handle = open(filename, 'w')
+        for song in song_files:
+            handle.write((song + self.sep_song).encode("utf-8"))
+        handle.close()
+            
+        
+
+    def import_song_from_file(self):
+        filetoimport = QtGui.QFileDialog.getOpenFileName(self, "Importa canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
+        handle = open(filetoimport, 'r')
+        buf = handle.read()
+        handle.close()
+        buf = buf.split(self.sep)
+        newsong = song(buf[0], [], buf[1], buf[2], buf[3], buf[4])
+        for j in range(5,1024):
+            try:
+                if( (buf[j][0] == 'R') & (buf[j][1] == ':') ):
+                    newsong.add_chorus(buf[j].split("R:")[1])
+                else:
+                    newsong.add_verse(buf[j])
+            except:
+                break
+        self.set_active_song(newsong)
+
     def set_active_song(self, newsong):
         self.ui.le_title.setText(newsong.title)
         self.ui.le_mauthor.setText(newsong.mauthor)
@@ -77,14 +148,18 @@ class interface(QtGui.QMainWindow):
                 output += "R:"
             output += paragraph.content()
             output += "\n\n"
+        self.ui.te_body.setDocument(QtGui.QTextDocument(output, self.ui.te_body))
     
         
     def item_selected(self, item_text):
-        print "ohi"
+        newsong = ""
         for song in self.song_db:
             if(song.title == unicode(item_text)):
                 newsong = song
-        self.set_active_song(newsong)
+        if(newsong!=""):
+            self.set_active_song(newsong)
+        else:
+            self.new_song
 
 
     def create_latex_song(self):

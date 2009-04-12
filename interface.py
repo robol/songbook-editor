@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Thu Apr  9 10:53:01 2009
+# Created: Sun Apr 12 21:20:13 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -105,8 +105,14 @@ class Ui_MainWindow(object):
         self.actionSalva.setObjectName("actionSalva")
         self.actionEsci_2 = QtGui.QAction(MainWindow)
         self.actionEsci_2.setObjectName("actionEsci_2")
+        self.actionSalva_canzone = QtGui.QAction(MainWindow)
+        self.actionSalva_canzone.setObjectName("actionSalva_canzone")
+        self.actionImporta_canzone = QtGui.QAction(MainWindow)
+        self.actionImporta_canzone.setObjectName("actionImporta_canzone")
         self.menuFile.addAction(self.actionApri)
         self.menuFile.addAction(self.actionSalva)
+        self.menuFile.addAction(self.actionSalva_canzone)
+        self.menuFile.addAction(self.actionImporta_canzone)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionEsci_2)
         self.menubar.addAction(self.menuFile.menuAction())
@@ -131,4 +137,6 @@ class Ui_MainWindow(object):
         self.actionEsci.setText(QtGui.QApplication.translate("MainWindow", "Esci", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSalva.setText(QtGui.QApplication.translate("MainWindow", "Salva", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEsci_2.setText(QtGui.QApplication.translate("MainWindow", "Esci", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionSalva_canzone.setText(QtGui.QApplication.translate("MainWindow", "Salva canzone", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionImporta_canzone.setText(QtGui.QApplication.translate("MainWindow", "Importa canzone", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -156,6 +156,8 @@
     </property>
     <addaction name="actionApri"/>
     <addaction name="actionSalva"/>
+    <addaction name="actionSalva_canzone"/>
+    <addaction name="actionImporta_canzone"/>
     <addaction name="separator"/>
     <addaction name="actionEsci_2"/>
    </widget>
@@ -180,6 +182,16 @@
   <action name="actionEsci_2">
    <property name="text">
     <string>Esci</string>
+   </property>
+  </action>
+  <action name="actionSalva_canzone">
+   <property name="text">
+    <string>Salva canzone</string>
+   </property>
+  </action>
+  <action name="actionImporta_canzone">
+   <property name="text">
+    <string>Importa canzone</string>
    </property>
   </action>
  </widget>
