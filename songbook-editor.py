@@ -4,7 +4,7 @@ from PyQt4 import QtGui, QtCore
 from interface import *
 from song import *
 from latex_manager import *
-import re
+import re, sys
 
 class interface(QtGui.QMainWindow):
     def __init__(self, lm, parent=None):
@@ -177,7 +177,7 @@ class interface(QtGui.QMainWindow):
 
 
 if __name__ == "__main__":
-    app = QtGui.QApplication(None)
+    app = QtGui.QApplication(sys.argv)
     lm = latex_manager()
     widget = interface(lm)
     widget.show()
