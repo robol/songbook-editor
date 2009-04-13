@@ -122,7 +122,7 @@ class interface(QtGui.QMainWindow):
     def import_song_from_file(self):
         filetoimport = QtGui.QFileDialog.getOpenFileName(self, "Importa canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
         handle = open(filetoimport, 'r')
-        buf = handle.read()
+        buf = handle.read().decode("utf-8")
         handle.close()
         buf = buf.split(self.sep)
         newsong = song(buf[0], [], buf[1], buf[2], buf[3], buf[4])

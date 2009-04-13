@@ -3,7 +3,7 @@ import re
 class latex_manager():
     def __init__(self):
         ## TODO: Verify Latex Installation
-        print "LaTeX loaded"
+        return
 
     def create_song(self, song):
         # Ci aspettiamo di ottenere un oggetto song
@@ -31,13 +31,37 @@ class latex_manager():
 
         latex_song += "\n\\end{song}\n\n"
         
-        # Transform chords in LaTeX Chords
-        latex_song = re.sub("\[", "\\Ch{", latex_song)
-        latex_song = re.sub("\](\w|\s)(\w|\s)(\w|\s)(\w|\s)", self.quadra_to_chord_end, latex_song)
-        latex_song = re.sub("\]", "}{}", latex_song)
+        # Transform chords in LaTeX Chords (this part has to be removed..)
+        #latex_song = re.sub("\[", "\\Ch{", latex_song)
+        #latex_song = re.sub("\](\w|\s){4}", self.quadra_to_chord_end, latex_song)
+        #latex_song = re.sub("\]", "}{}", latex_song)
+
+        latex_song = self.sub_chord(latex_song)
         
         return latex_song
         
-    def quadra_to_chord_end(self,m):
-        st = "}{" + m.group(1) + m.group(2) + m.group(3) + m.group(4) + "}"
-        return st
+
+    def sub_chord(self,m):
+        j = 0
+        print j, len(m)
+        while(j < len(m)):
+            if(m[j] == '['):
+                # We have a chord!, then...
+                # 1) How many letters is the chords?
+                count = 0
+                while(m[count + j + 1] != ']'):
+                    count += 1
+                # 2) Are there count + 1 words "free" after the chord?
+                free = count + 2
+                for i in range(j + count + 2,j + count + 2 + (count + 2) ):
+                    print "m[i] = ", m[i]
+                    if( (m[i] == '\n') | (m[i] == '[') | (m[i] == '{') ):
+                        free = i - j - count - 2
+                        break
+                print "free = " , free
+                # Free what we need...and rebuild the new string...
+                m = m[0:j] + "\Ch{" + m[j+1:j+count+1] + "}{" + m[j+count+2:j+count+free+2] + "}" + m[j+count+free+2:len(m)]
+                j = j + count + free + 3
+            else:
+                j += 1
+        return m
