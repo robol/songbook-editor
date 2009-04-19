@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Sun Apr 12 21:20:13 2009
+# Created: Sun Apr 19 19:39:41 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -126,8 +126,8 @@ class Ui_MainWindow(object):
         self.btn_new_song.setText(QtGui.QApplication.translate("MainWindow", "New Song", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_delete_song.setText(QtGui.QApplication.translate("MainWindow", "Delete Song", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Titolo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Autore Testo", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Autore Musica", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Autore", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Copyright", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Anno", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("MainWindow", "Tonalità", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_savesong.setText(QtGui.QApplication.translate("MainWindow", "Salva", None, QtGui.QApplication.UnicodeUTF8))
