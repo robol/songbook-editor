@@ -43,7 +43,7 @@ class latex_manager():
 
     def sub_chord(self,m):
         j = 0
-        print j, len(m)
+        # print j, len(m) this is just debug!
         while(j < len(m)):
             if(m[j] == '['):
                 # We have a chord!, then...
@@ -54,11 +54,11 @@ class latex_manager():
                 # 2) Are there count + 1 words "free" after the chord?
                 free = count + 2
                 for i in range(j + count + 2,j + count + 2 + (count + 2) ):
-                    print "m[i] = ", m[i]
+                    # print "m[i] = ", m[i] Removing debug
                     if( (m[i] == '\n') | (m[i] == '[') | (m[i] == '{') ):
                         free = i - j - count - 2
                         break
-                print "free = " , free
+                # Debug is unuseful now! print "free = " , free
                 # Free what we need...and rebuild the new string...
                 m = m[0:j] + "\Ch{" + m[j+1:j+count+1] + "}{" + m[j+count+2:j+count+free+2] + "}" + m[j+count+free+2:len(m)]
                 j = j + count + free + 3

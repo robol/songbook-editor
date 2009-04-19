@@ -11,6 +11,7 @@ class interface(QtGui.QMainWindow):
         super(interface, self).__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
         # Create an empty database of songs... 
         self.song_db = []
 
@@ -56,7 +57,8 @@ class interface(QtGui.QMainWindow):
         newsong = song(newtitle, [], newmauthor, newtauthor, newtone, newyear)
 
         newbody = unicode(self.ui.te_body.toPlainText())
-        print newbody
+        # Just debug
+        # print newbody
         newbody = re.split("\n\n+", newbody)
         for paragraph in newbody:
             if(len(paragraph) < 3):
