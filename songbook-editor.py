@@ -182,12 +182,18 @@ class interface(QtGui.QMainWindow):
 
     def export_songbook(self):
         # Chiedo al latex manager di farlo.. :)
-        return 0
-            
-        
-    
-    
+        sbk = lm.export_songbook(self.song_db)
 
+        # Apriamo un file
+        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva file latex", "/home/leonardo", "LaTeX Source File (*.tex)")
+        if(filename == ''):
+            # We do not have to do nothing, the user clicked Cancel
+            return 0
+        handle = open(filename, 'w')
+        handle.write(sbk.encode("utf-8"))
+        handle.close()
+
+            
 
 
 if __name__ == "__main__":

@@ -65,3 +65,18 @@ class latex_manager():
             else:
                 j += 1
         return m
+
+    def export_songbook(self,song_list):
+        # Assume that song list is an array of songs and
+        # create a songbook with them
+
+        # New buffer
+        buf = unicode()
+        
+        for song in song_list:
+            buf += "\n\n" # Put some space between songs
+            buf += "% Canzone:" + song.title + "\n\n"
+            buf += self.create_song(song)
+            
+        # Give buffer back to be printed
+        return buf
