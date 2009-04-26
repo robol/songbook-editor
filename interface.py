@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Sun Apr 19 19:39:41 2009
+# Created: Sun Apr 26 18:50:24 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.list_songs.sizePolicy().hasHeightForWidth())
         self.list_songs.setSizePolicy(sizePolicy)
         self.list_songs.setObjectName("list_songs")
-        self.gridLayout.addWidget(self.list_songs, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.list_songs, 1, 0, 1, 1)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btn_new_song = QtGui.QPushButton(self.gridLayoutWidget)
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.btn_delete_song = QtGui.QPushButton(self.gridLayoutWidget)
         self.btn_delete_song.setObjectName("btn_delete_song")
         self.horizontalLayout.addWidget(self.btn_delete_song)
-        self.gridLayout.addLayout(self.horizontalLayout, 1, 0, 2, 1)
+        self.gridLayout.addLayout(self.horizontalLayout, 2, 0, 2, 1)
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.gridLayout_2 = QtGui.QGridLayout()
@@ -77,7 +77,7 @@ class Ui_MainWindow(object):
         self.te_body.setAcceptRichText(False)
         self.te_body.setObjectName("te_body")
         self.verticalLayout.addWidget(self.te_body)
-        self.gridLayout.addLayout(self.verticalLayout, 0, 1, 1, 1)
+        self.gridLayout.addLayout(self.verticalLayout, 1, 1, 1, 1)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.btn_savesong = QtGui.QPushButton(self.gridLayoutWidget)
@@ -86,13 +86,25 @@ class Ui_MainWindow(object):
         self.btn_create_latex_song = QtGui.QPushButton(self.gridLayoutWidget)
         self.btn_create_latex_song.setObjectName("btn_create_latex_song")
         self.horizontalLayout_2.addWidget(self.btn_create_latex_song)
-        self.gridLayout.addLayout(self.horizontalLayout_2, 1, 1, 2, 1)
+        self.gridLayout.addLayout(self.horizontalLayout_2, 2, 1, 2, 1)
+        self.label_6 = QtGui.QLabel(self.gridLayoutWidget)
+        self.label_6.setTextFormat(QtCore.Qt.RichText)
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.gridLayout.addWidget(self.label_6, 0, 0, 1, 1)
+        self.label_7 = QtGui.QLabel(self.gridLayoutWidget)
+        self.label_7.setObjectName("label_7")
+        self.gridLayout.addWidget(self.label_7, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 23))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtGui.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
+        self.menuCanzoniere = QtGui.QMenu(self.menubar)
+        self.menuCanzoniere.setObjectName("menuCanzoniere")
+        self.menuCanzone = QtGui.QMenu(self.menubar)
+        self.menuCanzone.setObjectName("menuCanzone")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -109,13 +121,18 @@ class Ui_MainWindow(object):
         self.actionSalva_canzone.setObjectName("actionSalva_canzone")
         self.actionImporta_canzone = QtGui.QAction(MainWindow)
         self.actionImporta_canzone.setObjectName("actionImporta_canzone")
+        self.actionEsporta_in_LaTeX = QtGui.QAction(MainWindow)
+        self.actionEsporta_in_LaTeX.setObjectName("actionEsporta_in_LaTeX")
         self.menuFile.addAction(self.actionApri)
         self.menuFile.addAction(self.actionSalva)
-        self.menuFile.addAction(self.actionSalva_canzone)
-        self.menuFile.addAction(self.actionImporta_canzone)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionEsci_2)
+        self.menuCanzoniere.addAction(self.actionEsporta_in_LaTeX)
+        self.menuCanzone.addAction(self.actionSalva_canzone)
+        self.menuCanzone.addAction(self.actionImporta_canzone)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuCanzoniere.menuAction())
+        self.menubar.addAction(self.menuCanzone.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.actionEsci_2, QtCore.SIGNAL("activated()"), MainWindow.close)
@@ -123,20 +140,33 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SongBook Editor 0.1", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_new_song.setText(QtGui.QApplication.translate("MainWindow", "New Song", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_delete_song.setText(QtGui.QApplication.translate("MainWindow", "Delete Song", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_new_song.setText(QtGui.QApplication.translate("MainWindow", "Nuova Canzone", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_delete_song.setText(QtGui.QApplication.translate("MainWindow", "Elimina Canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Titolo", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Autore", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Copyright", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Anno", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("MainWindow", "Tonalità", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_savesong.setText(QtGui.QApplication.translate("MainWindow", "Salva", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_create_latex_song.setText(QtGui.QApplication.translate("MainWindow", "Esporta in LaTeX", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_savesong.setText(QtGui.QApplication.translate("MainWindow", "Aggiungi al canzoniere", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_create_latex_song.setText(QtGui.QApplication.translate("MainWindow", "Esporta canzone in LaTeX", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Droid Sans\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Lista Canzoni</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_7.setText(QtGui.QApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Droid Sans\'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600;\">Canzone selezionata</span></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuCanzoniere.setTitle(QtGui.QApplication.translate("MainWindow", "Canzoniere", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuCanzone.setTitle(QtGui.QApplication.translate("MainWindow", "Canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.actionApri.setText(QtGui.QApplication.translate("MainWindow", "Apri", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEsci.setText(QtGui.QApplication.translate("MainWindow", "Esci", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSalva.setText(QtGui.QApplication.translate("MainWindow", "Salva", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEsci_2.setText(QtGui.QApplication.translate("MainWindow", "Esci", None, QtGui.QApplication.UnicodeUTF8))
         self.actionSalva_canzone.setText(QtGui.QApplication.translate("MainWindow", "Salva canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.actionImporta_canzone.setText(QtGui.QApplication.translate("MainWindow", "Importa canzone", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionEsporta_in_LaTeX.setText(QtGui.QApplication.translate("MainWindow", "Esporta in LaTeX", None, QtGui.QApplication.UnicodeUTF8))
 

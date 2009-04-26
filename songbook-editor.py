@@ -31,10 +31,13 @@ class interface(QtGui.QMainWindow):
         self.connect(self.ui.btn_new_song, QtCore.SIGNAL("clicked()"), self.new_song)
         self.connect(self.ui.btn_delete_song, QtCore.SIGNAL("clicked()"), self.delete_item_from_list)
 
-        # File menu
+        # Menu Canzone
         self.connect(self.ui.actionSalva_canzone, QtCore.SIGNAL("activated()"), self.save_song_to_file)
         self.connect(self.ui.actionImporta_canzone, QtCore.SIGNAL("activated()"), self.import_song_from_file)
         self.connect(self.ui.actionSalva, QtCore.SIGNAL("activated()"), self.save_songs_to_file)
+
+        # Menu Canzoniere
+        self.connect(self.ui.actionEsporta_in_LaTeX, QtCore.SIGNAL("activated()"), self.export_songbook)
     
     # Functions to manage events
     def new_song(self):
@@ -168,11 +171,20 @@ class interface(QtGui.QMainWindow):
         song = self.get_active_song()
         filetowrite = lm.create_song(song)
         filename = QtGui.QFileDialog.getSaveFileName(self, "Salva file latex", "/home/leonardo", "LaTeX Source File (*.tex)")
+        if(filename == ''):
+            # We do not have to do nothing, the user clicked Cancel
+            return 0
         handle = open(filename, 'w')
         # Just remember that filetowrite is an "unicode" object, treat it
         # as it just deserve
         handle.write(filetowrite.encode("utf-8"))
         handle.close()
+
+    def export_songbook(self):
+        # Chiedo al latex manager di farlo.. :)
+        return 0
+            
+        
     
     
 

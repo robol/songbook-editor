@@ -27,7 +27,7 @@
      <property name="sizeConstraint">
       <enum>QLayout::SetMaximumSize</enum>
      </property>
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QListWidget" name="list_songs">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
@@ -37,25 +37,25 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0" rowspan="2">
+     <item row="2" column="0" rowspan="2">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QPushButton" name="btn_new_song">
          <property name="text">
-          <string>New Song</string>
+          <string>Nuova Canzone</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btn_delete_song">
          <property name="text">
-          <string>Delete Song</string>
+          <string>Elimina Canzone</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="0" column="1">
+     <item row="1" column="1">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <layout class="QGridLayout" name="gridLayout_2">
@@ -120,23 +120,51 @@
        </item>
       </layout>
      </item>
-     <item row="1" column="1" rowspan="2">
+     <item row="2" column="1" rowspan="2">
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QPushButton" name="btn_savesong">
          <property name="text">
-          <string>Salva</string>
+          <string>Aggiungi al canzoniere</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="btn_create_latex_song">
          <property name="text">
-          <string>Esporta in LaTeX</string>
+          <string>Esporta canzone in LaTeX</string>
          </property>
         </widget>
        </item>
       </layout>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Droid Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Lista Canzoni&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Droid Sans'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Canzone selezionata&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
@@ -156,12 +184,25 @@
     </property>
     <addaction name="actionApri"/>
     <addaction name="actionSalva"/>
-    <addaction name="actionSalva_canzone"/>
-    <addaction name="actionImporta_canzone"/>
     <addaction name="separator"/>
     <addaction name="actionEsci_2"/>
    </widget>
+   <widget class="QMenu" name="menuCanzoniere">
+    <property name="title">
+     <string>Canzoniere</string>
+    </property>
+    <addaction name="actionEsporta_in_LaTeX"/>
+   </widget>
+   <widget class="QMenu" name="menuCanzone">
+    <property name="title">
+     <string>Canzone</string>
+    </property>
+    <addaction name="actionSalva_canzone"/>
+    <addaction name="actionImporta_canzone"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuCanzoniere"/>
+   <addaction name="menuCanzone"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionApri">
@@ -192,6 +233,11 @@
   <action name="actionImporta_canzone">
    <property name="text">
     <string>Importa canzone</string>
+   </property>
+  </action>
+  <action name="actionEsporta_in_LaTeX">
+   <property name="text">
+    <string>Esporta in LaTeX</string>
    </property>
   </action>
  </widget>
