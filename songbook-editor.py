@@ -2,6 +2,7 @@
 
 from PyQt4 import QtGui, QtCore
 from interface import *
+from options import *
 from song import *
 from latex_manager import *
 import re, sys
@@ -11,6 +12,9 @@ class interface(QtGui.QMainWindow):
         super(interface, self).__init__(parent)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        # options dialog
+        self.opt = None
 
         # Create an empty database of songs... 
         self.song_db = []
@@ -193,6 +197,19 @@ class interface(QtGui.QMainWindow):
         handle.write(sbk.encode("utf-8"))
         handle.close()
 
+    def options(self):
+        self.opt = option_interface()
+        
+
+class option_interface(QtGui.QDialog):
+    def __init__(self, parent=None):
+        self.ui = Ui_options()
+        self.ui.setupUi(self)
+
+        self.connect(self.ui.buttonBox, QtCore.SIGNAL("accepted()"), self.accepted)
+
+        def accepted(self):
+            print "ciao"
             
 
 

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SongBook Editor 0.1</string>
+   <string>SongBook Editor 0.2</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="gridLayoutWidget">
@@ -192,6 +192,7 @@ p, li { white-space: pre-wrap; }
      <string>Canzoniere</string>
     </property>
     <addaction name="actionEsporta_in_LaTeX"/>
+    <addaction name="actionOpzioni_LaTeX"/>
    </widget>
    <widget class="QMenu" name="menuCanzone">
     <property name="title">
@@ -238,6 +239,11 @@ p, li { white-space: pre-wrap; }
   <action name="actionEsporta_in_LaTeX">
    <property name="text">
     <string>Esporta in LaTeX</string>
+   </property>
+  </action>
+  <action name="actionOpzioni_LaTeX">
+   <property name="text">
+    <string>Opzioni LaTeX</string>
    </property>
   </action>
  </widget>

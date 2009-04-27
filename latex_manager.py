@@ -72,6 +72,8 @@ class latex_manager():
 
         # New buffer
         buf = unicode()
+
+        # TODO: Latex code to compile the songbook
         
         for song in song_list:
             buf += "\n\n" # Put some space between songs

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Sun Apr 26 18:50:24 2009
+# Created: Sun Apr 26 19:28:13 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -123,11 +123,14 @@ class Ui_MainWindow(object):
         self.actionImporta_canzone.setObjectName("actionImporta_canzone")
         self.actionEsporta_in_LaTeX = QtGui.QAction(MainWindow)
         self.actionEsporta_in_LaTeX.setObjectName("actionEsporta_in_LaTeX")
+        self.actionOpzioni_LaTeX = QtGui.QAction(MainWindow)
+        self.actionOpzioni_LaTeX.setObjectName("actionOpzioni_LaTeX")
         self.menuFile.addAction(self.actionApri)
         self.menuFile.addAction(self.actionSalva)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionEsci_2)
         self.menuCanzoniere.addAction(self.actionEsporta_in_LaTeX)
+        self.menuCanzoniere.addAction(self.actionOpzioni_LaTeX)
         self.menuCanzone.addAction(self.actionSalva_canzone)
         self.menuCanzone.addAction(self.actionImporta_canzone)
         self.menubar.addAction(self.menuFile.menuAction())
@@ -139,7 +142,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SongBook Editor 0.1", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SongBook Editor 0.2", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_new_song.setText(QtGui.QApplication.translate("MainWindow", "Nuova Canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_delete_song.setText(QtGui.QApplication.translate("MainWindow", "Elimina Canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Titolo", None, QtGui.QApplication.UnicodeUTF8))
@@ -169,4 +172,5 @@ class Ui_MainWindow(object):
         self.actionSalva_canzone.setText(QtGui.QApplication.translate("MainWindow", "Salva canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.actionImporta_canzone.setText(QtGui.QApplication.translate("MainWindow", "Importa canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEsporta_in_LaTeX.setText(QtGui.QApplication.translate("MainWindow", "Esporta in LaTeX", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionOpzioni_LaTeX.setText(QtGui.QApplication.translate("MainWindow", "Opzioni LaTeX", None, QtGui.QApplication.UnicodeUTF8))
 
