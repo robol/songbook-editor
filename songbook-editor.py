@@ -37,6 +37,7 @@ class interface(QtGui.QMainWindow):
 
         # Menu File
         self.connect(self.ui.actionSalva, QtCore.SIGNAL("activated()"), self.save_songbook)
+        self.connect(self.ui.actionApri, QtCore.SIGNAL("activated()"), self.load_songbook)
 
         # Menu Canzone
         self.connect(self.ui.actionSalva_canzone, QtCore.SIGNAL("activated()"), self.save_song_to_file)
@@ -111,6 +112,27 @@ class interface(QtGui.QMainWindow):
             handle = open(filename, 'w')
             handle.write(saving.encode("utf-8"))
             handle.close()
+
+    def load_songbook(self):
+        filename = QtGui.QFileDialog.getOpenFileName(self, "Apri Canzoniere", "", "Canzoniere di RobolCanzoniere (*.rcc)")
+        if(filename != ""):
+            handle = open(filename, 'r')
+            buf = handle.read().decode("utf-8")
+            handle.close()
+        song_list = buf.split(self.sep_song)
+        self.song_db = []
+        for raw_song in song_list:
+            if(raw_song != ""):
+                self.song_db.append(self.file_to_song(raw_song))
+        # Update the list view
+        self.list_update()
+
+    def list_update(self):
+        self.ui.list_songs.clear()
+        for song in self.song_db:
+            self.ui.list_songs.addItem(song.title)
+            
+        
         
 
     def create_song_file(self, song_to_save=''):
@@ -141,15 +163,9 @@ class interface(QtGui.QMainWindow):
         for song in song_files:
             handle.write((song + self.sep_song).encode("utf-8"))
         handle.close()
-            
-        
 
-    def import_song_from_file(self):
-        filetoimport = QtGui.QFileDialog.getOpenFileName(self, "Importa canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
-        handle = open(filetoimport, 'r')
-        buf = handle.read().decode("utf-8")
-        handle.close()
-        buf = buf.split(self.sep)
+    def file_to_song(self, file_content):
+        buf = file_content.split(self.sep)
         newsong = song(buf[0], [], buf[1], buf[2], buf[3], buf[4])
         for j in range(5,1024):
             try:
@@ -159,7 +175,15 @@ class interface(QtGui.QMainWindow):
                     newsong.add_verse(buf[j])
             except:
                 break
-        self.set_active_song(newsong)
+        return newsong
+            
+        
+    def import_song_from_file(self):
+        filetoimport = QtGui.QFileDialog.getOpenFileName(self, "Importa canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
+        handle = open(filetoimport, 'r')
+        buf = handle.read().decode("utf-8")
+        handle.close()
+        self.set_active_song(self.file_to_song(buf))
 
     def set_active_song(self, newsong):
         self.ui.le_title.setText(newsong.title)
