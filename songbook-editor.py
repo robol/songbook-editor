@@ -35,10 +35,12 @@ class interface(QtGui.QMainWindow):
         self.connect(self.ui.btn_new_song, QtCore.SIGNAL("clicked()"), self.new_song)
         self.connect(self.ui.btn_delete_song, QtCore.SIGNAL("clicked()"), self.delete_item_from_list)
 
+        # Menu File
+        self.connect(self.ui.actionSalva, QtCore.SIGNAL("activated()"), self.save_songbook)
+
         # Menu Canzone
         self.connect(self.ui.actionSalva_canzone, QtCore.SIGNAL("activated()"), self.save_song_to_file)
         self.connect(self.ui.actionImporta_canzone, QtCore.SIGNAL("activated()"), self.import_song_from_file)
-        self.connect(self.ui.actionSalva, QtCore.SIGNAL("activated()"), self.save_songs_to_file)
 
         # Menu Canzoniere
         self.connect(self.ui.actionEsporta_in_LaTeX, QtCore.SIGNAL("activated()"), self.export_songbook)
@@ -98,9 +100,23 @@ class interface(QtGui.QMainWindow):
         handle.write(output.encode("utf-8"))
         handle.close()
 
-    def create_song_file(self):
+    def save_songbook(self):
+        # Default format is concatenated song files, with self.song_sep to
+        # separate them, so
+        saving = ""
+        for song in self.song_db:
+            saving += self.create_song_file(song) + self.sep_song
+        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva Canzoniere", "", "Canzoniere di RobolCanzoniere (*.rcc)")
+        if(filename != ""):
+            handle = open(filename, 'w')
+            handle.write(saving.encode("utf-8"))
+            handle.close()
+        
+
+    def create_song_file(self, song_to_save=''):
         sep = unicode(self.sep)
-        song_to_save = self.get_active_song()
+        if(song_to_save == ''):
+            song_to_save = self.get_active_song()
         # filename = QtGui.QFileDialog.getSaveFileName(self, "Salva canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
         # handle = open(filename, 'w')
         output = unicode()
