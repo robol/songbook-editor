@@ -23,9 +23,6 @@ class interface(QtGui.QMainWindow):
         self.sep = ":::"
         self.sep_song = "***"
 
-        # Connections
-        self.connect(self.ui.actionEsci_2, QtCore.SIGNAL("activated()"), self.exit_called)
-
         # Song edit part
         self.connect(self.ui.btn_create_latex_song, QtCore.SIGNAL("clicked()"), self.create_latex_song)
         self.connect(self.ui.btn_savesong, QtCore.SIGNAL("clicked()"), self.savesong)
@@ -54,9 +51,6 @@ class interface(QtGui.QMainWindow):
     def delete_item_from_list(self):
         item = self.ui.list_songs.currentRow()
         self.ui.list_songs.takeItem(item)
-    
-    def exit_called(self):
-        print "TODO: Save data on exit"
 
     def get_active_song(self):
         newtitle = unicode(self.ui.le_title.text())
