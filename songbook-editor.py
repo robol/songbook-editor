@@ -44,15 +44,22 @@ class interface(QtGui.QMainWindow):
         self.connect(self.ui.actionEsporta_in_LaTeX, QtCore.SIGNAL("activated()"), self.export_songbook)
     
     # Functions to manage events
+
+    # Reset the song screen on right and start working on a new song
     def new_song(self):
         s = song("")
         self.set_active_song(s)
 
+    # Delete the selected song from the list AND from the song_db
     def delete_item_from_list(self):
+        song = self.get_active_song()
         item = self.ui.list_songs.currentRow()
         self.ui.list_songs.takeItem(item)
+        self.song_db.remove(song)
 
+    # Get the song object of the active song
     def get_active_song(self):
+        # Get data
         newtitle = unicode(self.ui.le_title.text())
         newmauthor = unicode(self.ui.le_mauthor.text())
         newtauthor = unicode(self.ui.le_tauthor.text())
@@ -74,10 +81,12 @@ class interface(QtGui.QMainWindow):
 
         return newsong
 
+    # Add a new song in the db, and update the list
     def add_song_to_db(self, song):
         self.song_db.append(song)
         self.list_update()
 
+    # Save (and eventually overwrite) the active song in the songbook
     def savesong(self):
         need_new_song = True
         song_to_save = self.get_active_song()
@@ -91,6 +100,7 @@ class interface(QtGui.QMainWindow):
         if(need_new_song):
             self.add_song_to_db(song_to_save)
 
+    # Export song to a rcs file
     def save_song_to_file(self):
         filename = QtGui.QFileDialog.getSaveFileName(self, "Salva Canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
         output = self.create_song_file()
@@ -98,6 +108,7 @@ class interface(QtGui.QMainWindow):
         handle.write(output.encode("utf-8"))
         handle.close()
 
+    # Export songbook to a rcc file
     def save_songbook(self):
         # Default format is concatenated song files, with self.song_sep to
         # separate them, so
@@ -110,6 +121,7 @@ class interface(QtGui.QMainWindow):
             handle.write(saving.encode("utf-8"))
             handle.close()
 
+    # Load songbook from a rcc file
     def load_songbook(self):
         filename = QtGui.QFileDialog.getOpenFileName(self, "Apri Canzoniere", "", "Canzoniere di RobolCanzoniere (*.rcc)")
         if(filename != ""):
@@ -126,14 +138,16 @@ class interface(QtGui.QMainWindow):
         # the add_song_to_db function managing the widget update :)
         # Less fast, but more readable!
 
+
+    # Update the list view. This function is used from all the other functions that
+    # edit the self.song_db to make the list widget respecting it
     def list_update(self):
         self.ui.list_songs.clear()
         for song in self.song_db:
             self.ui.list_songs.addItem(song.title)
             
-        
-        
 
+    # Create the rcs file of song_to_save (non interactive function) that returns it
     def create_song_file(self, song_to_save=''):
         sep = unicode(self.sep)
         if(song_to_save == ''):
@@ -149,19 +163,7 @@ class interface(QtGui.QMainWindow):
                 rit = ""
             output += sep + rit + par.content()
         return output
-        # handle.write(output.encode())
-        # handle.close()
 
-    def save_songs_to_file(self):
-        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva Canzoniere", "", "Canzoniere di RobolCanzoniere (*.rcc)")
-        song_files = []
-        for song in self.song_db:
-            self.set_active_song(song)
-            song_files.append(self.create_song_file)
-        handle = open(filename, 'w')
-        for song in song_files:
-            handle.write((song + self.sep_song).encode("utf-8"))
-        handle.close()
 
     def file_to_song(self, file_content):
         buf = file_content.split(self.sep)
@@ -237,7 +239,8 @@ class interface(QtGui.QMainWindow):
         handle.close()
 
     def options(self):
-        self.opt = option_interface()
+        # self.opt = option_interface()
+        option.show()
         
 
 class option_interface(QtGui.QDialog):
