@@ -74,6 +74,10 @@ class interface(QtGui.QMainWindow):
 
         return newsong
 
+    def add_song_to_db(self, song):
+        self.song_db.append(song)
+        self.list_update()
+
     def savesong(self):
         need_new_song = True
         song_to_save = self.get_active_song()
@@ -85,8 +89,7 @@ class interface(QtGui.QMainWindow):
                 need_new_song = False
                 break
         if(need_new_song):
-            self.song_db.append(song_to_save)
-            self.ui.list_songs.addItem(list_item)
+            self.add_song_to_db(song_to_save)
 
     def save_song_to_file(self):
         filename = QtGui.QFileDialog.getSaveFileName(self, "Salva Canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
