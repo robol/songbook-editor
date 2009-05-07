@@ -120,9 +120,11 @@ class interface(QtGui.QMainWindow):
         self.song_db = []
         for raw_song in song_list:
             if(raw_song != ""):
-                self.song_db.append(self.file_to_song(raw_song))
+                self.add_song_to_db(self.file_to_song(raw_song))
         # Update the list view
-        self.list_update()
+        # self.list_update() This is not necessary anymore, because of
+        # the add_song_to_db function managing the widget update :)
+        # Less fast, but more readable!
 
     def list_update(self):
         self.ui.list_songs.clear()
