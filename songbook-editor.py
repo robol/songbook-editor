@@ -251,7 +251,8 @@ class interface(QtGui.QMainWindow):
         self.opt["type"] = "tc" ## tc = text and chords, c = only chords, s = slide
 
 
-
+# This class manage the Dialog that prompt the user for
+# common options...
 class option_interface(QtGui.QWidget):
     def __init__(self, parent=None):
         super(option_interface,self).__init__(parent)
