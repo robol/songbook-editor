@@ -13,8 +13,9 @@ class interface(QtGui.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # options dialog
-        self.opt = None
+        # options Database
+        self.opt = {}
+        self.set_default_options()
 
         # Create an empty database of songs... 
         self.song_db = []
@@ -42,6 +43,7 @@ class interface(QtGui.QMainWindow):
 
         # Menu Canzoniere
         self.connect(self.ui.actionEsporta_in_LaTeX, QtCore.SIGNAL("activated()"), self.export_songbook)
+        self.connect(self.ui.actionOpzioni_LaTeX, QtCore.SIGNAL("activated()"), self.options)
     
     # Functions to manage events
 
@@ -241,22 +243,59 @@ class interface(QtGui.QMainWindow):
     def options(self):
         # self.opt = option_interface()
         option.show()
-        
 
-class option_interface(QtGui.QDialog):
+    def set_default_options(self):
+        self.opt["paper_size"] = "A5"
+        self.opt["title"] = "Canzoniere"
+        self.opt["subtitle"] = "Autore Sconosciuto"
+        self.opt["type"] = "tc" ## tc = text and chords, c = only chords, s = slide
+
+
+
+class option_interface(QtGui.QWidget):
     def __init__(self, parent=None):
+        super(option_interface,self).__init__(parent)
         self.ui = Ui_options()
         self.ui.setupUi(self)
 
-        self.connect(self.ui.buttonBox, QtCore.SIGNAL("accepted()"), self.accepted)
+        # Options dictionary
+        self.paper_size_dic = {"A4":1, "A5":2}
+        
 
-        def accepted(self):
-            print "ciao"
+        QtCore.QObject.connect(self.ui.buttonBox, QtCore.SIGNAL("accepted()"), self.ok)
+        self.connect(self.ui.buttonBox, QtCore.SIGNAL("rejected()"), self.cancel)
+
+    def cancel(self):
+        self.hide()
+
+    def ok(self):
+        # Set paper size
+        if(self.ui.paper_size.currentIndex() == 1):
+            widget.opt["paper_size"] = "A4"
+        elif(self.ui.paper_size.currentIndex() == 2):
+            widget.opt["paper_size"] = "A5"
+
+        # Set songbook type
+        if(self.ui.type.currentIndex() == 1):
+            widget.opt["type"] = "tc"
+        elif(self.ui.type.currentIndex() == 2):
+            widget.opt["type"] = "c"
+        elif(self.ui.type.currentIndex() == 3):
+            widget.opt["type"] == "s"
+        
+        # Set songbook title
+        widget.opt["title"] = unicode(self.ui.title.text())
+        # Set songbook subtitle
+        widget.opt["subtitle"] = unicode(self.ui.subtitle.text())
+        
+        # Hide options
+        self.hide()
             
 
 
 if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
+    option = option_interface()
     lm = latex_manager()
     widget = interface(lm)
     widget.show()
