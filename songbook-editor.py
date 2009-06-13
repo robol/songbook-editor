@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
+import re,sys
+sys.path.append("./libs")
+sys.path.append("./ui")
 from PyQt4 import QtGui, QtCore
 from interface import *
 from options import *
 from song import *
 from latex_manager import *
-import re, sys
+
+
 
 class interface(QtGui.QMainWindow):
     def __init__(self, lm, parent=None):
