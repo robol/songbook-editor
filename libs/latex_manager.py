@@ -66,7 +66,7 @@ class latex_manager():
                 j += 1
         return m
 
-    def export_songbook(self,song_list):
+    def export_songbook(self,song_list, opt):
         # Assume that song list is an array of songs and
         # create a songbook with them
 
@@ -75,23 +75,26 @@ class latex_manager():
 
         # TODO: Latex code to compile the songbook
         # Document class
-        buf += "\documentclass[10pt,a5paper,twoside]{book}\n"
+        buf += "\\documentclass[10pt,a5paper,twoside]{book}\n"
         
         # Packages
-        buf += "\usepackage[a5paper,chordbk]{songbook}\n"
-        buf += "\usepackage[utf8x]{inputenc}\n"
-        buf += "\usepackage{makeidx}\n"
+        buf += "\\usepackage[a5paper,chordbk]{songbook}\n"
+        buf += "\\usepackage[utf8x]{inputenc}\n"
+        buf += "\\usepackage{makeidx}\n"
         buf += "\n\n"
 
         # Index generation
-        buf += "\MakeTitleIndex\n"
-        buf += "\MakeTitleContents\n"
-        buf += "\MakeKeyIndex\n"
-        buf += "\makeindex\n"
+        buf += "\\MakeTitleIndex\n"
+        buf += "\\MakeTitleContents\n"
+        buf += "\\MakeKeyIndex\n"
+        buf += "\\makeindex\n"
         buf += "\n\n"
 
         # Document begins
         buf += "\\begin{document}\n\n"
+
+        # Main title
+        buf += "\\title{" + opt["title"] + "}"
         
         for song in song_list:
             buf += "\n\n" # Put some space between songs

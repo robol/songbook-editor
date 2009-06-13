@@ -233,7 +233,7 @@ class interface(QtGui.QMainWindow):
 
     def export_songbook(self):
         # Chiedo al latex manager di farlo.. :)
-        sbk = lm.export_songbook(self.song_db)
+        sbk = lm.export_songbook(self.song_db, widget.opt)
 
         # Apriamo un file
         filename = QtGui.QFileDialog.getSaveFileName(self, "Salva file latex", "/home/leonardo", "LaTeX Source File (*.tex)")
