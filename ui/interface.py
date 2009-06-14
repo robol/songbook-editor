@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Sun Jun 14 20:05:39 2009
+# Created: Sun Jun 14 21:55:56 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,9 +83,9 @@ class Ui_MainWindow(object):
         self.btn_savesong = QtGui.QPushButton(self.gridLayoutWidget)
         self.btn_savesong.setObjectName("btn_savesong")
         self.horizontalLayout_2.addWidget(self.btn_savesong)
-        self.btn_create_latex_song = QtGui.QPushButton(self.gridLayoutWidget)
-        self.btn_create_latex_song.setObjectName("btn_create_latex_song")
-        self.horizontalLayout_2.addWidget(self.btn_create_latex_song)
+        self.btn_create_pdf = QtGui.QPushButton(self.gridLayoutWidget)
+        self.btn_create_pdf.setObjectName("btn_create_pdf")
+        self.horizontalLayout_2.addWidget(self.btn_create_pdf)
         self.gridLayout.addLayout(self.horizontalLayout_2, 2, 1, 2, 1)
         self.label_6 = QtGui.QLabel(self.gridLayoutWidget)
         self.label_6.setTextFormat(QtCore.Qt.RichText)
@@ -157,7 +157,7 @@ class Ui_MainWindow(object):
         self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Anno", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("MainWindow", "Tonalità", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_savesong.setText(QtGui.QApplication.translate("MainWindow", "Aggiungi al canzoniere", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_create_latex_song.setText(QtGui.QApplication.translate("MainWindow", "Esporta canzone in LaTeX", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_create_pdf.setText(QtGui.QApplication.translate("MainWindow", "Esporta canzoniere in PDF", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"

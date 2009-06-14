@@ -130,9 +130,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btn_create_latex_song">
+        <widget class="QPushButton" name="btn_create_pdf">
          <property name="text">
-          <string>Esporta canzone in LaTeX</string>
+          <string>Esporta canzoniere in PDF</string>
          </property>
         </widget>
        </item>

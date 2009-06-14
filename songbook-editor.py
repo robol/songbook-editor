@@ -29,7 +29,7 @@ class interface(QtGui.QMainWindow):
         self.sep_song = "***"
 
         # Song edit part
-        self.connect(self.ui.btn_create_latex_song, QtCore.SIGNAL("clicked()"), self.create_latex_song)
+        self.connect(self.ui.btn_create_pdf, QtCore.SIGNAL("clicked()"), self.export_to_PDF)
         self.connect(self.ui.btn_savesong, QtCore.SIGNAL("clicked()"), self.savesong)
 
         # About the list
