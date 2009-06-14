@@ -193,6 +193,8 @@ p, li { white-space: pre-wrap; }
     </property>
     <addaction name="actionEsporta_in_LaTeX"/>
     <addaction name="actionOpzioni_LaTeX"/>
+    <addaction name="actionEsporta_in_DVI"/>
+    <addaction name="actionEsporta_in_PDF"/>
    </widget>
    <widget class="QMenu" name="menuCanzone">
     <property name="title">
@@ -244,6 +246,16 @@ p, li { white-space: pre-wrap; }
   <action name="actionOpzioni_LaTeX">
    <property name="text">
     <string>Opzioni LaTeX</string>
+   </property>
+  </action>
+  <action name="actionEsporta_in_DVI">
+   <property name="text">
+    <string>Esporta in DVI</string>
+   </property>
+  </action>
+  <action name="actionEsporta_in_PDF">
+   <property name="text">
+    <string>Esporta in PDF</string>
    </property>
   </action>
  </widget>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Sun Apr 26 19:28:13 2009
+# Created: Sun Jun 14 20:05:39 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -125,12 +125,18 @@ class Ui_MainWindow(object):
         self.actionEsporta_in_LaTeX.setObjectName("actionEsporta_in_LaTeX")
         self.actionOpzioni_LaTeX = QtGui.QAction(MainWindow)
         self.actionOpzioni_LaTeX.setObjectName("actionOpzioni_LaTeX")
+        self.actionEsporta_in_DVI = QtGui.QAction(MainWindow)
+        self.actionEsporta_in_DVI.setObjectName("actionEsporta_in_DVI")
+        self.actionEsporta_in_PDF = QtGui.QAction(MainWindow)
+        self.actionEsporta_in_PDF.setObjectName("actionEsporta_in_PDF")
         self.menuFile.addAction(self.actionApri)
         self.menuFile.addAction(self.actionSalva)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionEsci_2)
         self.menuCanzoniere.addAction(self.actionEsporta_in_LaTeX)
         self.menuCanzoniere.addAction(self.actionOpzioni_LaTeX)
+        self.menuCanzoniere.addAction(self.actionEsporta_in_DVI)
+        self.menuCanzoniere.addAction(self.actionEsporta_in_PDF)
         self.menuCanzone.addAction(self.actionSalva_canzone)
         self.menuCanzone.addAction(self.actionImporta_canzone)
         self.menubar.addAction(self.menuFile.menuAction())
@@ -173,4 +179,6 @@ class Ui_MainWindow(object):
         self.actionImporta_canzone.setText(QtGui.QApplication.translate("MainWindow", "Importa canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEsporta_in_LaTeX.setText(QtGui.QApplication.translate("MainWindow", "Esporta in LaTeX", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpzioni_LaTeX.setText(QtGui.QApplication.translate("MainWindow", "Opzioni LaTeX", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionEsporta_in_DVI.setText(QtGui.QApplication.translate("MainWindow", "Esporta in DVI", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionEsporta_in_PDF.setText(QtGui.QApplication.translate("MainWindow", "Esporta in PDF", None, QtGui.QApplication.UnicodeUTF8))
 

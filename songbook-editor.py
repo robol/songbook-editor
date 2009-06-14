@@ -44,6 +44,8 @@ class interface(QtGui.QMainWindow):
         # Menu Canzone
         self.connect(self.ui.actionSalva_canzone, QtCore.SIGNAL("activated()"), self.save_song_to_file)
         self.connect(self.ui.actionImporta_canzone, QtCore.SIGNAL("activated()"), self.import_song_from_file)
+        self.connect(self.ui.actionEsporta_in_DVI, QtCore.SIGNAL("activated()"), self.export_to_DVI)
+        self.connect(self.ui.actionEsporta_in_PDF, QtCore.SIGNAL("activated()"), self.export_to_PDF)
 
         # Menu Canzoniere
         self.connect(self.ui.actionEsporta_in_LaTeX, QtCore.SIGNAL("activated()"), self.export_songbook)
@@ -170,7 +172,7 @@ class interface(QtGui.QMainWindow):
             output += sep + rit + par.content()
         return output
 
-
+    # Convert a file (rcs) to a song object
     def file_to_song(self, file_content):
         buf = file_content.split(self.sep)
         newsong = song(buf[0], [], buf[1], buf[2], buf[3], buf[4])
@@ -184,7 +186,7 @@ class interface(QtGui.QMainWindow):
                 break
         return newsong
             
-        
+    # import a song from a file on the local hard drive, the function is interactive!    
     def import_song_from_file(self):
         filetoimport = QtGui.QFileDialog.getOpenFileName(self, "Importa canzone", "", "Canzoni di RobolCanzoniere (*.rcs)")
         handle = open(filetoimport, 'r')
@@ -217,7 +219,7 @@ class interface(QtGui.QMainWindow):
         else:
             self.new_song
 
-
+    # Converte una canzone in un file LaTeX non autosufficiente, che puo' essere inserito in un altro canzoniere latex.
     def create_latex_song(self):
         song = self.get_active_song()
         filetowrite = lm.create_song(song)
@@ -231,6 +233,8 @@ class interface(QtGui.QMainWindow):
         handle.write(filetowrite.encode("utf-8"))
         handle.close()
 
+
+    # Esporta il canzoniere in LaTeX, in ogni caso dovra' essere esportato
     def export_songbook(self):
         # Chiedo al latex manager di farlo.. :)
         sbk = lm.export_songbook(self.song_db, widget.opt)
@@ -243,6 +247,35 @@ class interface(QtGui.QMainWindow):
         handle = open(filename, 'w')
         handle.write(sbk.encode("utf-8"))
         handle.close()
+
+    # Esporta il canzoniere in DVI
+    def export_to_DVI(self):
+        # Otteniamo il codice LaTeX
+        sbk = lm.export_songbook(self.song_db, widget.opt) 
+        # Compiliamo il DVI
+        dvifile = lm.latex_compile(sbk, widget.opt)
+        # Apriamo un file                                                                                                                                                          
+        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva file DVI", "", "DVI file (*.dvi)")
+        if(filename == ''):
+            # We do not have to do nothing, the user clicked Cancel                                                                                                                
+                return 0
+        handle = open(filename, 'wb')
+        handle.write(dvifile)
+        handle.close()
+
+    # Esporta il canzoniere in PDF
+    def export_to_PDF(self):
+        pdf_file = lm.create_pdf_from_songbook(self.song_db, widget.opt)
+        # Apriamo un file                                                                                                                                                          
+        filename = QtGui.QFileDialog.getSaveFileName(self, "Salva file PDF", "", "PDF file (*.pdf)")
+        if(filename == ''):
+            # We do not have to do nothing, the user clicked Cancel                                                                                                                
+            return 0
+        handle = open(filename, 'wb')
+        handle.write(pdf_file)
+        handle.close()
+
+        
 
     def options(self):
         # self.opt = option_interface()

@@ -1,4 +1,4 @@
-import re
+import re, subprocess, os, tempfile, shutil
 
 class latex_manager():
     def __init__(self):
@@ -84,9 +84,7 @@ class latex_manager():
         buf += "\n\n"
 
         # Index generation
-        buf += "\\MakeTitleIndex\n"
-        buf += "\\MakeTitleContents\n"
-        buf += "\\MakeKeyIndex\n"
+        buf += "\index{" + opt["title"] + "}\n"
         buf += "\\makeindex\n"
         buf += "\n\n"
 
@@ -109,3 +107,79 @@ class latex_manager():
             
         # Give buffer back to be printed
         return buf
+
+    def latex_compile(self, latex_file, opt):
+        # We should check that latex exist...
+        lat = subprocess.Popen(["latex", ""], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Gli spediamo il nostro documento latex
+        out, err = lat.communicate(latex_file.encode("utf-8"))
+        
+        return out # Binary data
+
+    def create_index_ist(self):
+        buf = unicode();
+        buf += "headings_flag    1\n"
+        buf += "heading_prefix   \"\\n \\\\item \\\\textbf{\"\n"
+        buf += "heading_suffix   \"}\" \n"
+        buf += "symhead_positive \"Simboli\"\n"
+        buf += "symhead_negative \"simboli\"\n"
+        buf += "numhead_positive \"Numeri\"\n"
+        buf += "numhead_negative \"numeri\"\n"
+        buf += "delim_0          \" \\\\dotfill\\\\ \"\n"
+        buf += "delim_1          \" \\\\dotfill\\\\ \"\n"
+        buf += "delim_2          \" \\\\dotfill\\\\ \"\n"
+        return buf
+
+
+    def create_pdf_from_songbook(self, song_list, opt):
+        # Creo una directory temporanea
+        tmpdir = tempfile.mkdtemp()
+        
+        # Creo il file index.ist che mi servira' per l'indice
+        f = open(tmpdir + "/index.ist", 'w')
+        f.write(self.create_index_ist())
+        f.close()
+
+        # Creo il file latex
+        f = open(tmpdir + "/canzoniere.tex", 'w')
+        f.write(self.export_songbook(song_list, opt).encode("utf-8"))
+        f.close()
+
+        # Comincio a compilare il codice
+        p = subprocess.Popen(["latex", tmpdir + "/canzoniere.tex"], cwd = tmpdir, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        out, err = p.communicate("q\n") # in questo modo va avanti anche in caso di errori
+        p.wait()
+        
+        # print tmpdir # Se gia' fa questo non e' male :)
+
+        # Creo l'indice
+        p = subprocess.Popen("makeindex -s index.ist canzoniere.idx", shell=True ,cwd = tmpdir, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        p.wait()
+
+        # Ricreo il DVI finale
+        p = subprocess.Popen(["latex", tmpdir + "/canzoniere.tex"], cwd = tmpdir, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        out, err = p.communicate("q\n") # in questo modo va avanti anche in caso di errori    
+        p.wait()
+
+        # Converto in PS
+        p = subprocess.Popen("dvips -t a5 canzoniere.dvi -q -o", shell=True, cwd = tmpdir, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        p.wait()
+
+        # Converto in PDF
+        p = subprocess.Popen(["ps2pdf", "canzoniere.ps"], cwd = tmpdir, stdin = subprocess.PIPE, stdout =subprocess.PIPE, stderr= subprocess.PIPE)
+        p.wait()
+
+        # Leggo il PDF
+        f = open(tmpdir + "/canzoniere.pdf", 'rb')
+        pdf = f.read()
+        f.close()
+        
+        # Elimino le cartelle temporanee
+        shutil.rmtree(tmpdir)
+        
+        return pdf
+
+                           
+                            
+        
