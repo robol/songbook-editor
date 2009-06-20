@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Sat Jun 20 18:49:32 2009
+# Created: Sat Jun 20 19:06:39 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -211,6 +211,8 @@ class Ui_MainWindow(object):
         self.actionEsporta_in_DVI.setObjectName("actionEsporta_in_DVI")
         self.actionEsporta_in_PDF = QtGui.QAction(MainWindow)
         self.actionEsporta_in_PDF.setObjectName("actionEsporta_in_PDF")
+        self.actionOrdina_Canzoni = QtGui.QAction(MainWindow)
+        self.actionOrdina_Canzoni.setObjectName("actionOrdina_Canzoni")
         self.menuFile.addAction(self.actionApri)
         self.menuFile.addAction(self.actionSalva)
         self.menuFile.addSeparator()
@@ -219,6 +221,7 @@ class Ui_MainWindow(object):
         self.menuCanzoniere.addAction(self.actionOpzioni_LaTeX)
         self.menuCanzoniere.addAction(self.actionEsporta_in_DVI)
         self.menuCanzoniere.addAction(self.actionEsporta_in_PDF)
+        self.menuCanzoniere.addAction(self.actionOrdina_Canzoni)
         self.menuCanzone.addAction(self.actionSalva_canzone)
         self.menuCanzone.addAction(self.actionImporta_canzone)
         self.menubar.addAction(self.menuFile.menuAction())
@@ -263,4 +266,5 @@ class Ui_MainWindow(object):
         self.actionOpzioni_LaTeX.setText(QtGui.QApplication.translate("MainWindow", "Opzioni LaTeX", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEsporta_in_DVI.setText(QtGui.QApplication.translate("MainWindow", "Esporta in DVI", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEsporta_in_PDF.setText(QtGui.QApplication.translate("MainWindow", "Esporta in PDF", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionOrdina_Canzoni.setText(QtGui.QApplication.translate("MainWindow", "Ordina Canzoni", None, QtGui.QApplication.UnicodeUTF8))
 

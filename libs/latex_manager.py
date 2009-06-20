@@ -75,10 +75,10 @@ class latex_manager():
 
         # TODO: Latex code to compile the songbook
         # Document class
-        buf += "\\documentclass[10pt,a5paper,twoside]{book}\n"
+        buf += "\\documentclass[10pt," + opt["paper_size"] + ",twoside]{book}\n"
         
         # Packages
-        buf += "\\usepackage[a5paper,chordbk]{songbook}\n"
+        buf += "\\usepackage[" + opt["paper_size"] + "paper, " + opt["type"] + "]{songbook}\n"
         buf += "\\usepackage[utf8x]{inputenc}\n"
         buf += "\\usepackage{makeidx}\n"
         buf += "\n\n"
@@ -163,7 +163,7 @@ class latex_manager():
         p.wait()
 
         # Converto in PS
-        p = subprocess.Popen("dvips -t a5 canzoniere.dvi -q -o", shell=True, cwd = tmpdir, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+        p = subprocess.Popen("dvips -t " + opt["paper_size"] + " canzoniere.dvi -q -o", shell=True, cwd = tmpdir, stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)
         p.wait()
 
         # Converto in PDF

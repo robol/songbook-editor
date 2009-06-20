@@ -55,6 +55,7 @@ class interface(QtGui.QMainWindow):
         # Menu Canzoniere
         self.connect(self.ui.actionEsporta_in_LaTeX, QtCore.SIGNAL("activated()"), self.export_songbook)
         self.connect(self.ui.actionOpzioni_LaTeX, QtCore.SIGNAL("activated()"), self.options)
+        self.connect(self.ui.actionOrdina_Canzoni, QtCore.SIGNAL("activated()"), self.sort_list)
     
     # Functions to manage events
 
@@ -62,6 +63,18 @@ class interface(QtGui.QMainWindow):
     def new_song(self):
         s = song("")
         self.set_active_song(s)
+
+    def compare_songs(self, song_1, song_2):
+        if(song_1.title > song_2.title):
+            return 1
+        elif(song_1.title < song_2.title):
+            return -1
+        else:
+            return 0
+
+    def sort_list(self):
+        self.song_db.sort(self.compare_songs)
+        self.list_update()
 
     # Delete the selected song from the list AND from the song_db
     def delete_item_from_list(self):
@@ -338,7 +351,8 @@ class option_interface(QtGui.QWidget):
         self.ui.setupUi(self)
 
         # Options dictionary
-        self.paper_size_dic = {"A4":1, "A5":2}
+        self.paper_size_dic = {0:"a4", 1:"a5"}
+        self.type_dic = {0:"chordbk", 1:"wordbk", 2:"overhead"}
         
 
         QtCore.QObject.connect(self.ui.buttonBox, QtCore.SIGNAL("accepted()"), self.ok)
@@ -349,18 +363,10 @@ class option_interface(QtGui.QWidget):
 
     def ok(self):
         # Set paper size
-        if(self.ui.paper_size.currentIndex() == 1):
-            widget.opt["paper_size"] = "A4"
-        elif(self.ui.paper_size.currentIndex() == 2):
-            widget.opt["paper_size"] = "A5"
+        widget.opt["paper_size"] = self.paper_size_dic[self.ui.paper_size.currentIndex()]
 
         # Set songbook type
-        if(self.ui.type.currentIndex() == 1):
-            widget.opt["type"] = "tc"
-        elif(self.ui.type.currentIndex() == 2):
-            widget.opt["type"] = "c"
-        elif(self.ui.type.currentIndex() == 3):
-            widget.opt["type"] == "s"
+        widget.opt["type"] = self.type_dic[self.ui.type.currentIndex()]
         
         # Set songbook title
         widget.opt["title"] = unicode(self.ui.title.text())
