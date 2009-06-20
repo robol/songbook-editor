@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'interface.ui'
 #
-# Created: Sat Jun 20 19:06:39 2009
+# Created: Sat Jun 20 19:36:32 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -233,14 +233,14 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SongBook Editor 0.2", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "SongBook Editor 0.3", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_delete_song.setText(QtGui.QApplication.translate("MainWindow", "Elimina Canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Titolo", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Autore", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Copyright", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Anno", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("MainWindow", "Tonalità", None, QtGui.QApplication.UnicodeUTF8))
-        self.btn_savesong.setText(QtGui.QApplication.translate("MainWindow", "Aggiungi al canzoniere", None, QtGui.QApplication.UnicodeUTF8))
+        self.btn_savesong.setText(QtGui.QApplication.translate("MainWindow", "Salva", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_new_song.setText(QtGui.QApplication.translate("MainWindow", "Nuova Canzone", None, QtGui.QApplication.UnicodeUTF8))
         self.btn_create_pdf.setText(QtGui.QApplication.translate("MainWindow", "Esporta canzoniere in PDF", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"

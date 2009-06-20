@@ -9,6 +9,7 @@ os.chdir("".join(sys.argv[0].rsplit("songbook-editor.py",1)))
 from PyQt4 import QtGui, QtCore
 from interface import *
 from options import *
+import syntax_highlighter
 from song import *
 from latex_manager import *
 
@@ -56,6 +57,8 @@ class interface(QtGui.QMainWindow):
         self.connect(self.ui.actionEsporta_in_LaTeX, QtCore.SIGNAL("activated()"), self.export_songbook)
         self.connect(self.ui.actionOpzioni_LaTeX, QtCore.SIGNAL("activated()"), self.options)
         self.connect(self.ui.actionOrdina_Canzoni, QtCore.SIGNAL("activated()"), self.sort_list)
+
+        self.sh = syntax_highlighter.syntax_highlighter(self.ui.te_body.document())
     
     # Functions to manage events
 
@@ -261,6 +264,7 @@ class interface(QtGui.QMainWindow):
             output += paragraph.content()
             output += "\n\n"
         self.ui.te_body.setDocument(QtGui.QTextDocument(output, self.ui.te_body))
+        self.sh = syntax_highlighter.syntax_highlighter(self.ui.te_body.document())
     
         
     def item_selected(self, item_text):

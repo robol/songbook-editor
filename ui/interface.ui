@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>SongBook Editor 0.2</string>
+   <string>SongBook Editor 0.3</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -208,7 +208,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Aggiungi al canzoniere</string>
+          <string>Salva</string>
          </property>
         </widget>
        </item>
