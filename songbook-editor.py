@@ -39,6 +39,8 @@ class interface(QtGui.QMainWindow):
         self.connect(self.ui.list_songs, QtCore.SIGNAL("currentTextChanged ( QString )"), self.item_selected)
         self.connect(self.ui.btn_new_song, QtCore.SIGNAL("clicked()"), self.new_song)
         self.connect(self.ui.btn_delete_song, QtCore.SIGNAL("clicked()"), self.delete_item_from_list)
+        self.connect(self.ui.btn_list_move_down, QtCore.SIGNAL("clicked()"), self.list_move_down)
+        self.connect(self.ui.btn_list_move_up, QtCore.SIGNAL("clicked()"), self.list_move_up)
 
         # Menu File
         self.connect(self.ui.actionSalva, QtCore.SIGNAL("activated()"), self.save_songbook)
@@ -92,6 +94,12 @@ class interface(QtGui.QMainWindow):
 
         return newsong
 
+    def get_active_song_in_list(self):
+        newsong = self.get_active_song()
+        for song in self.song_db:
+            if( (song.title == newsong.title) ):
+                return song
+
     # Add a new song in the db, and update the list
     def add_song_to_db(self, song):
         self.song_db.append(song)
@@ -111,6 +119,33 @@ class interface(QtGui.QMainWindow):
                 break            
         if(need_new_song):
             self.add_song_to_db(song_to_save)
+
+    def get_item_from_song(self, song):
+        self.list_update()
+        ind = self.song_db.index(song)
+        return self.ui.list_songs.item(ind)
+
+    def list_move_up(self):
+        song = self.get_active_song_in_list()
+        ind = self.song_db.index(song)
+        if(ind == 0):
+            return
+        self.song_db.pop(ind)
+        self.song_db.insert(ind-1, song)
+        self.list_update()
+        self.ui.list_songs.setItemSelected(self.get_item_from_song(song), 1)
+
+    def list_move_down(self):
+        song = self.get_active_song_in_list()
+        ind = self.song_db.index(song)
+        if(ind == len(self.song_db)):
+            return
+        self.song_db.pop(ind)
+        self.song_db.insert(ind+1, song)
+        self.list_update()
+        self.ui.list_songs.setItemSelected(self.get_item_from_song(song), 1)
+
+
 
     # Export song to a rcs file
     def save_song_to_file(self):
@@ -140,6 +175,8 @@ class interface(QtGui.QMainWindow):
             handle = open(filename, 'r')
             buf = handle.read().decode("utf-8")
             handle.close()
+        else:
+            return
         song_list = buf.split(self.sep_song)
         self.song_db = []
         for raw_song in song_list:
