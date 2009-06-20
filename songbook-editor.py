@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
-import re,sys
+import re,sys, os
 sys.path.append("./libs")
 sys.path.append("./ui")
+# Questo e' solo un trucchetto per fare in modo che il programm
+# trovi le mie librerie anche se viene lanciato da strani posti :)
+os.chdir("".join(sys.argv[0].rsplit("songbook-editor.py",1)))
 from PyQt4 import QtGui, QtCore
 from interface import *
 from options import *
