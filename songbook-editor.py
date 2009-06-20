@@ -336,7 +336,6 @@ class interface(QtGui.QMainWindow):
         
 
     def options(self):
-        # self.opt = option_interface()
         option.show()
 
     def set_default_options(self):
