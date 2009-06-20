@@ -340,10 +340,10 @@ class interface(QtGui.QMainWindow):
         option.show()
 
     def set_default_options(self):
-        self.opt["paper_size"] = "A5"
+        self.opt["paper_size"] = "a5"
         self.opt["title"] = "Canzoniere"
         self.opt["subtitle"] = "Autore Sconosciuto"
-        self.opt["type"] = "tc" ## tc = text and chords, c = only chords, s = slide
+        self.opt["type"] = "chordbk"
 
 
 # This class manage the Dialog that prompt the user for
