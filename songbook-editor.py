@@ -102,9 +102,10 @@ class interface(QtGui.QMainWindow):
         # Check if we have already saved this song or if it's a new entry
         for song in self.song_db:
             if(song.title == song_to_save.title):
-                song = song_to_save
+                # Questa linea di codice e' orribile, ma non capisco come dovrei fare per salvare la canzone
+                self.song_db[self.song_db.index(song)] = song_to_save 
                 need_new_song = False
-                break
+                break            
         if(need_new_song):
             self.add_song_to_db(song_to_save)
 
