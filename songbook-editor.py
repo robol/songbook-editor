@@ -88,27 +88,9 @@ class interface(QtGui.QMainWindow):
 
     # Get the song object of the active song
     def get_active_song(self):
-        # Get data
-        newtitle = unicode(self.ui.le_title.text())
-        newmauthor = unicode(self.ui.le_mauthor.text())
-        newtauthor = unicode(self.ui.le_tauthor.text())
-        newyear = unicode(self.ui.le_year.text())
-        newtone = unicode(self.ui.le_tone.text())
-        newsong = song(newtitle, [], newmauthor, newtauthor, newtone, newyear)
-
-        newbody = unicode(self.ui.te_body.toPlainText())
-        # Just debug
-        # print newbody
-        newbody = re.split("\n\n+", newbody)
-        for paragraph in newbody:
-            if(len(paragraph) < 3):
-                break
-            if( (paragraph[0] == 'R') & (paragraph[1] == ':') ):
-                newsong.add_chorus(paragraph.split("R:")[1])
-            else:
-                newsong.add_verse(paragraph)
-
-        return newsong
+        for song in self.song_db:
+            if( song.title == unicode(self.ui.le_title.text()) ):
+                return song
 
     def get_active_song_in_list(self):
         newsong = self.get_active_song()
