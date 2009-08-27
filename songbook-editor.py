@@ -103,7 +103,7 @@ class interface(QtGui.QMainWindow):
         self.song_db.append(song)
         self.list_update()
 
-    # Save (and eventually overwrite) the active song in the songbook
+    # Save (and/or overwrite) the active song in the songbook
     def savesong(self):
         need_new_song = True
         song_to_save = self.get_active_song()
